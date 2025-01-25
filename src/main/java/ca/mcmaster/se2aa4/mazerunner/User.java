@@ -5,26 +5,27 @@ import java.util.ArrayList;
 
 public class User {
 
+    // Attributes
     private int row;
     private int column;
-    private ArrayList<Character> path = new ArrayList<Character>();
+    private ArrayList<Character> path = new ArrayList<Character>(); // Array list to store moves in path
 
     public User(int row, int column) {
         this.row = row;
-        this.column = column;
+        this.column = column; // Constructors
     }
 
     public int getRow() {
-        return row;
+        return row; // Get row of current postion
     }
 
     public int getColumn() {
-        return column;
+        return column; // Get column of current postion
     }
 
-    public void moveForward() {
-        char direction = 'E';
-        switch (direction) {
+    public void moveForward() { // Method to move forward in the maze
+        char direction = 'E'; // Initial direction set East for now
+        switch (direction) { // Switch case to change position depending on direction faced
             case 'N':
                 row = row-1;
                 path.add('F');
@@ -44,10 +45,10 @@ public class User {
         }
     }
 
-    public void canonicalPath() {
+    public void canonicalPath() { // Method to display canonical path
         System.out.println("Canonical Path: ");
-        for (char i : path) {
-            System.out.print(i);
+        for (char i : path) { // Loop through each move in array list
+            System.out.print(i); // Print each move
         }
         System.out.println();
     }

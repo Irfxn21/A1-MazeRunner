@@ -17,7 +17,7 @@ public class Main {
         logger.info("** Starting Maze Runner");
 
         Options options = new Options();
-        options.addOption("i", true, "Maze file");
+        options.addOption("i", true, "Maze file"); // Flag to be detected
 
         try {
             CommandLineParser parser = new DefaultParser();
@@ -28,38 +28,38 @@ public class Main {
                 return;
             }
 
-            String mazeFile = cmd.getOptionValue("i");
+            String mazeFile = cmd.getOptionValue("i"); // checking for i flag
 
             logger.info("**** Reading the maze from file " + mazeFile);
-            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
+            BufferedReader reader = new BufferedReader(new FileReader(mazeFile)); 
 
-            List<char[]> mazeRows = new ArrayList<>();
+            List<char[]> mazeRows = new ArrayList<>(); // list to store rows of maze file
 
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) { // reading maze from file
                 char[] row = line.toCharArray();
-                mazeRows.add(row);
+                mazeRows.add(row); // adding row to list
                 
-                for (int idx = 0; idx < line.length(); idx++) {
+                for (int idx = 0; idx < line.length(); idx++) { // iterating through each character in line
                     if (line.charAt(idx) == '#') {
-                        logger.debug("WALL ");
+                        logger.debug("WALL "); // check and log for wall
                     } else if (line.charAt(idx) == ' ') {
-                        logger.debug("PASS ");
+                        logger.debug("PASS "); // check and log for empty space
                     }
                 }
                 logger.debug(System.lineSeparator());
             }
             reader.close();
             logger.info("**** Computing path");
-            char[][] grid = mazeRows.toArray(new char[0][]);
-            Maze maze = new Maze(grid);
+            char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
+            Maze maze = new Maze(grid); // create an object in Maze
 
-            maze.playMaze();
+            maze.playMaze(); // Method to calculate and display canonical path of given maze
 
         } catch (Exception e) {
             logger.error("/!\\ An error has occurred /!\\", e);
             logger.error("PATH NOT COMPUTED");
-            logger.info("** End of MazeRunner");
+            logger.info("** End of MazeRunner"); // Error handling if incorrect input
         }
     }
 }
