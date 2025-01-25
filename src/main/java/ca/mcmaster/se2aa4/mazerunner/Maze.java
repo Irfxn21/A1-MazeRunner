@@ -1,28 +1,36 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.List;
 import java.util.ArrayList;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.commons.cli.*;
 
 public class Maze {
 
     private char[][] grid;
     private int rows, columns;
     private int startRow, startColumn;
-    private char startDirection;
 
-    public Maze() {
-
+    public Maze(char[][] grid) {
+        this.grid = grid;
+        this.rows = grid.length;
+        this.columns = grid[0].length;
+        this.startRow = 0;
+        this.startColumn = 0;
+        findEntryPoint();
     }
 
-
-    private void findEntryPoint() {
-        for (int i=0; i<rows; i++) {
-            if (grid[i][0] == ' ') {
-                startRow = i;
-                startColumn = 0;
-                return
-            }
+    public void findEntryPoint() {
+    for (int i = 0; i < rows; i++) {
+        if (grid[i][0] == ' ') { // Look for a space in the first column
+            startRow = i;
+            startColumn = 0; // Entry is always in the first column
+            return;
         }
-        logger.info("No entry point in maze")
+    }
+    throw new IllegalStateException("No entry point in maze");
     }
 
     public int getStartRow() {
@@ -33,9 +41,12 @@ public class Maze {
         return startColumn;
     }
 
-    pubic char[][] getGrid() {
-        reutrn grid;
+    public void playMaze() {
+        User user = new User(getStartRow(), getStartColumn());
+
+        while(user.getColumn() != columns-1) {
+            user.moveForward();
+        }
+        user.canonicalPath();
     }
-
-
 }   
