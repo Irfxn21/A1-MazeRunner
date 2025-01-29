@@ -1,12 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
-
 public class Maze {
 
     private char[][] grid;
@@ -23,14 +16,14 @@ public class Maze {
     }
 
     public void findEntryPoint() { // Method to find entry point of maze
-    for (int i = 0; i < rows; i++) {
-        if (grid[i][0] == ' ') { // Look for a space in the first column
-            startRow = i;
-            startColumn = 0; // Assuming entry in first column for now
-            return;
+        for (int i = 0; i < rows; i++) {
+            if (grid[i][0] == ' ') { // Look for a space in the first column
+                startRow = i;
+                startColumn = 0; // Assuming entry in first column for now
+                return;
+            }
         }
-    }
-    throw new IllegalStateException("No entry point in maze"); // Error if no empty spaces in first column
+        throw new IllegalStateException("No entry point in maze"); // Error if no empty spaces in first column
     }
 
     public int getStartRow() {
@@ -44,9 +37,9 @@ public class Maze {
     public void playMaze() { // Method to iterate through spaces in maze and produce canonical path
         User user = new User(getStartRow(), getStartColumn()); // Create object in User
 
-        while(user.getColumn() != columns-1) {
+        while (user.getColumn() != columns - 1) {
             user.moveForward(); // Method to move forward in maze
         }
         user.canonicalPath(); // Method to display canonical path
     }
-}   
+}

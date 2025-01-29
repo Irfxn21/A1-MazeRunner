@@ -18,28 +18,31 @@ public class Main {
 
         Options options = new Options();
         options.addOption("i", true, "Maze file"); // Flag to be detected
+        options.addOption("p", true, "Maze path"); // Flag to be detected
 
         try {
             CommandLineParser parser = new DefaultParser();
-            CommandLine cmd = parser.parse(options, args);
+            CommandLine cmd1 = parser.parse(options, args);
+            CommandLine cmd2 = parser.parse(options, args);
 
-            if (!cmd.hasOption("i")) {
+            if (!cmd1.hasOption("i")) {
                 logger.info("Use -i flag to input maze file");
                 return;
             }
 
-            String mazeFile = cmd.getOptionValue("i"); // checking for i flag
+            String mazeFile = cmd1.getOptionValue("i"); // storing name of file
 
             logger.info("**** Reading the maze from file " + mazeFile);
-            BufferedReader reader = new BufferedReader(new FileReader(mazeFile)); 
+            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
 
             List<char[]> mazeRows = new ArrayList<>(); // list to store rows of maze file
 
             String line;
+
             while ((line = reader.readLine()) != null) { // reading maze from file
                 char[] row = line.toCharArray();
                 mazeRows.add(row); // adding row to list
-                
+
                 for (int idx = 0; idx < line.length(); idx++) { // iterating through each character in line
                     if (line.charAt(idx) == '#') {
                         logger.debug("WALL "); // check and log for wall
@@ -50,11 +53,17 @@ public class Main {
                 logger.debug(System.lineSeparator());
             }
             reader.close();
-            logger.info("**** Computing path");
-            char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
-            Maze maze = new Maze(grid); // create an object in Maze
 
-            maze.playMaze(); // Method to calculate and display canonical path of given maze
+            if (cmd2.hasOption("p")) { // Check for p flag
+                String givenPath = cmd2.getOptionValue("p"); // Storing given path
+
+            } else {
+                logger.info("**** Computing path");
+                char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
+                Maze maze = new Maze(grid); // create an object in Maze
+
+                maze.playMaze(); // Method to calculate and display canonical path of given maze
+            }
 
         } catch (Exception e) {
             logger.error("/!\\ An error has occurred /!\\", e);
