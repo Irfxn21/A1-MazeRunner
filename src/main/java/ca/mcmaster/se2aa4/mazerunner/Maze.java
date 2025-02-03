@@ -26,6 +26,14 @@ public class Maze {
         throw new IllegalStateException("No entry point in maze"); // Error if no empty spaces in first column
     }
 
+    public boolean wallCheck(int x, int y) {
+        if (grid[x][y] == '#') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int getStartRow() {
         return startRow; // Get sratinging row
     }
@@ -35,10 +43,17 @@ public class Maze {
     }
 
     public void playMaze() { // Method to iterate through spaces in maze and produce canonical path
-        User user = new User(getStartRow(), getStartColumn()); // Create object in User
 
-        while (user.getColumn() != columns - 1) {
-            user.moveForward(); // Method to move forward in maze
+        findEntryPoint();
+        User user = new User(getStartRow(), getStartColumn()); // Create object in User
+        while (user.getColumn() != columns) {
+            if (!wallCheck(user.getRow(), user.getColumn())) {
+                System.out.println(user.getColumn());
+                user.moveForward(); // Method to move forward in maze
+            } else {
+                System.out.println("There is a wall");
+                break;
+            }
         }
         user.canonicalPath(); // Method to display canonical path
         user.factorizedPath();
