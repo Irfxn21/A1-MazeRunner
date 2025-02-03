@@ -91,23 +91,18 @@ public class User {
     }
 
     public void moveForward() { // Method to move forward in the maze
-        switch (direction) { // Switch case to change position depending on direction faced
-            case 'N':
-                row = row - 1;
-                path.add('F');
-                break;
-            case 'S':
-                row = row + 1;
-                path.add('F');
-                break;
-            case 'E':
-                column = column + 1;
-                path.add('F');
-                break;
-            case 'W':
-                column = column - 1;
-                path.add('F');
-                break;
+        if (direction == 'N') {
+            row = row - 1;
+            path.add('F');
+        } else if (direction == 'S') {
+            row = row + 1;
+            path.add('F');
+        } else if (direction == 'E') {
+            column = column + 1;
+            path.add('F');
+        } else if (direction == 'W') {
+            column = column - 1;
+            path.add('F');
         }
     }
 
