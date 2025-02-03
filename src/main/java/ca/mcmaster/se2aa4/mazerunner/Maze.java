@@ -46,9 +46,8 @@ public class Maze {
 
         findEntryPoint();
         User user = new User(getStartRow(), getStartColumn()); // Create object in User
-        while (user.getColumn() != columns) {
-            if (!wallCheck(user.getRow(), user.getColumn())) {
-                System.out.println(user.getColumn());
+        while (user.getColumn() != columns - 1) {
+            if (!wallCheck(user.getNextRow(), user.getNextColumn())) {
                 user.moveForward(); // Method to move forward in maze
             } else {
                 System.out.println("There is a wall");
@@ -56,6 +55,6 @@ public class Maze {
             }
         }
         user.canonicalPath(); // Method to display canonical path
-        user.factorizedPath();
+        user.factorizedPath(); // Method to display factorized path
     }
 }

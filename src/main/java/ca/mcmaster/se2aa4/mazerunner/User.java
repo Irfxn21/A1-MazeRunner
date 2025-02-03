@@ -8,6 +8,7 @@ public class User {
     // Attributes
     private int row;
     private int column;
+    private char direction = 'E'; // Initial direction set East for now
     private ArrayList<Character> path = new ArrayList<Character>(); // Array list to store moves in path
 
     public User(int row, int column) {
@@ -23,8 +24,73 @@ public class User {
         return column; // Get column of current postion
     }
 
+    public int getNextRow() {
+        if (direction == 'N') {
+            return row - 1;
+        }
+        if (direction == 'S') {
+            return row + 1;
+        }
+        return row;
+    }
+
+    public int getNextColumn() {
+        if (direction == 'E') {
+            return column + 1;
+        }
+        if (direction == 'W') {
+            return column - 1;
+        }
+        return column;
+    }
+
+    public int getRightRow() {
+        if (direction == 'N' || direction == 'S') {
+            return row;
+        }
+        if (direction == 'E') {
+            return row + 1;
+        }
+        return row - 1;
+    }
+
+    public int getRightColumn() {
+        if (direction == 'E' || direction == 'W') {
+            return column;
+        }
+        if (direction == 'N') {
+            return column + 1;
+        }
+        return column - 1;
+    }
+
+    public void turnRight() {
+        if (direction == 'N') {
+            direction = 'E';
+        } else if (direction == 'S') {
+            direction = 'W';
+        } else if (direction == 'E') {
+            direction = 'S';
+        } else {
+            direction = 'N';
+        }
+        path.add('R');
+    }
+
+    public void turnLeft() {
+        if (direction == 'N') {
+            direction = 'W';
+        } else if (direction == 'S') {
+            direction = 'E';
+        } else if (direction == 'E') {
+            direction = 'N';
+        } else {
+            direction = 'S';
+        }
+        path.add('L');
+    }
+
     public void moveForward() { // Method to move forward in the maze
-        char direction = 'E'; // Initial direction set East for now
         switch (direction) { // Switch case to change position depending on direction faced
             case 'N':
                 row = row - 1;
