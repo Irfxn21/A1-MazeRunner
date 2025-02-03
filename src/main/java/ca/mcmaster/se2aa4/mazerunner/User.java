@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class User {
+public abstract class User {
 
     // Attributes
     protected int row;
@@ -63,4 +63,12 @@ public class User {
         }
         return column - 1;
     }
+
+    public abstract void moveForward();
+
+    public abstract void turnRight();
+
+    public abstract void turnLeft();
+
+    public abstract void displayPath();
 }

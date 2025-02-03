@@ -11,9 +11,6 @@ public class PathChecker {
     }
 
     public boolean verifyPath(String path) {
-
-        // maze.findEntryPoint();
-        // User user = new User(getStartRow(), getStartColumn()); // Create object in
         String canonicalPath = expandPath(path);
         for (char i : canonicalPath.toCharArray()) {
             if (i == 'F') {

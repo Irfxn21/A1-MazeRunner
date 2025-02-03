@@ -21,7 +21,6 @@ public class PathCalculator {
     public void factorizedPath() {
         char temp = path.get(0);
         int count = 1;
-        System.out.println("Factorized Path: ");
         for (int i = 1; i < path.size(); i++) {
             if (path.get(i) == temp) {
                 count += 1;
