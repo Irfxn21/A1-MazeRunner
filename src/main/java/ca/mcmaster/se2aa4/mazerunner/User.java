@@ -27,19 +27,19 @@ public class User {
         char direction = 'E'; // Initial direction set East for now
         switch (direction) { // Switch case to change position depending on direction faced
             case 'N':
-                row = row-1;
+                row = row - 1;
                 path.add('F');
                 break;
             case 'S':
-                row = row+1;
+                row = row + 1;
                 path.add('F');
                 break;
             case 'E':
-                column = column+1;
+                column = column + 1;
                 path.add('F');
                 break;
             case 'W':
-                column = column-1;
+                column = column - 1;
                 path.add('F');
                 break;
         }
@@ -49,6 +49,31 @@ public class User {
         System.out.println("Canonical Path: ");
         for (char i : path) { // Loop through each move in array list
             System.out.print(i); // Print each move
+        }
+        System.out.println();
+    }
+
+    public void factorizedPath() {
+        char temp = path.get(0);
+        int count = 1;
+        System.out.println("Factorized Path: ");
+        for (int i = 1; i < path.size(); i++) {
+            if (path.get(i) == temp) {
+                count += 1;
+            } else {
+                if (count > 1) {
+                    System.out.print(count + "" + temp + " ");
+                } else {
+                    System.out.print(temp + " ");
+                }
+                count = 1;
+                temp = path.get(i);
+            }
+        }
+        if (count > 1) {
+            System.out.print(count + "" + temp);
+        } else {
+            System.out.print(temp);
         }
         System.out.println();
     }

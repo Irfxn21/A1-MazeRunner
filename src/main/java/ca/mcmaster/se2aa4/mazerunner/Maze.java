@@ -41,5 +41,6 @@ public class Maze {
             user.moveForward(); // Method to move forward in maze
         }
         user.canonicalPath(); // Method to display canonical path
+        user.factorizedPath();
     }
 }
