@@ -54,18 +54,19 @@ public class Main {
             }
             reader.close();
 
+            char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
+            Maze maze = new Maze(grid); // create an object in Maze
+            User user = new User(maze.getStartRow(), maze.getStartColumn()); // create an object in User
+
             if (cmd2.hasOption("p")) { // Check for p flag
                 String givenPath = cmd2.getOptionValue("p"); // Storing given path
                 logger.info("**** Verifying path");
-                char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
-                Maze maze1 = new Maze(grid); // create an object in Maze
 
-                maze1.verifyPath(givenPath);
+                PathChecker checkPath = new PathChecker(maze, user);
+                checkPath.verifyPath(givenPath);
 
             } else {
                 logger.info("**** Computing path");
-                char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
-                Maze maze = new Maze(grid); // create an object in Maze
 
                 maze.playMaze(); // Method to calculate and display canonical path of given maze
             }

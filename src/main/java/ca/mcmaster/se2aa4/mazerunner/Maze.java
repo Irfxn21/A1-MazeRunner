@@ -34,6 +34,14 @@ public class Maze {
         }
     }
 
+    public int sizeRow() {
+        return rows;
+    }
+
+    public int sizeColumn() {
+        return columns;
+    }
+
     public int getStartRow() {
         return startRow; // Get sratinging row
     }
