@@ -56,7 +56,7 @@ public class Main {
 
             char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
             Maze maze = new Maze(grid); // create an object in Maze
-            User user = new User(maze.getStartRow(), maze.getStartColumn()); // create an object in User
+            Movement user = new Movement(maze.getStartRow(), maze.getStartColumn()); // create an object in User
 
             if (cmd2.hasOption("p")) { // Check for p flag
                 String givenPath = cmd2.getOptionValue("p"); // Storing given path
@@ -68,7 +68,7 @@ public class Main {
             } else {
                 logger.info("**** Computing path");
 
-                maze.playMaze(); // Method to calculate and display canonical path of given maze
+                maze.playMaze(user); // Method to calculate and display canonical path of given maze
             }
 
         } catch (Exception e) {

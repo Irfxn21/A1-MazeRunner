@@ -3,18 +3,17 @@ package ca.mcmaster.se2aa4.mazerunner;
 public class PathChecker {
 
     private Maze maze;
-    private User user;
+    private Movement user;
 
-    public PathChecker(Maze maze, User user) {
+    public PathChecker(Maze maze, Movement user) {
         this.maze = maze;
         this.user = user;
     }
 
     public boolean verifyPath(String path) {
 
-        maze.findEntryPoint();
+        // maze.findEntryPoint();
         // User user = new User(getStartRow(), getStartColumn()); // Create object in
-        // User
         String canonicalPath = expandPath(path);
         for (char i : canonicalPath.toCharArray()) {
             if (i == 'F') {
