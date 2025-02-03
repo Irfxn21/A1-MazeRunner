@@ -47,11 +47,18 @@ public class Maze {
         findEntryPoint();
         User user = new User(getStartRow(), getStartColumn()); // Create object in User
         while (user.getColumn() != columns - 1) {
-            if (!wallCheck(user.getNextRow(), user.getNextColumn())) {
+            int rightRow = user.getRightRow();
+            int rightColumn = user.getRightColumn();
+            int nextRow = user.getNextRow();
+            int nextColumn = user.getNextColumn();
+
+            if (!wallCheck(rightRow, rightColumn)) {
+                user.turnRight();
                 user.moveForward(); // Method to move forward in maze
+            } else if (!wallCheck(nextRow, nextColumn)) {
+                user.moveForward();
             } else {
-                System.out.println("There is a wall");
-                break;
+                user.turnLeft();
             }
         }
         user.canonicalPath(); // Method to display canonical path
