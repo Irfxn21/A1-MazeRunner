@@ -56,6 +56,11 @@ public class Main {
 
             if (cmd2.hasOption("p")) { // Check for p flag
                 String givenPath = cmd2.getOptionValue("p"); // Storing given path
+                logger.info("**** Verifying path");
+                char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
+                Maze maze1 = new Maze(grid); // create an object in Maze
+
+                maze1.verifyPath(givenPath);
 
             } else {
                 logger.info("**** Computing path");
