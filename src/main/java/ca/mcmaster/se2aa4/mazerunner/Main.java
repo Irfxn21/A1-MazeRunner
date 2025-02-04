@@ -12,36 +12,34 @@ public class Main {
         logger.info("** Starting Maze Runner");
 
         Options options = new Options();
-        options.addOption("i", true, "Maze file"); // Flag to be detected
-        options.addOption("p", true, "Maze path"); // Flag to be detected
+        options.addOption("i", true, "Maze file");
+        options.addOption("p", true, "Maze path"); // Flags to be detected
 
         try {
             CommandLineParser parser = new DefaultParser();
-            CommandLine cmd1 = parser.parse(options, args);
-            CommandLine cmd2 = parser.parse(options, args);
+            CommandLine cmd = parser.parse(options, args);
 
-            if (!cmd1.hasOption("i")) {
-                logger.info("Use -i flag to input maze file");
-                return;
+            if (!cmd.hasOption("i")) {
+                logger.error("Use -i flag to input maze file"); // Logs error if i flag not detected
             }
 
-            String mazeFile = cmd1.getOptionValue("i"); // storing name of file
+            String mazeFile = cmd.getOptionValue("i"); // storing name of file
 
-            char[][] grid = MazeReader.readMaze(mazeFile);
+            char[][] grid = MazeReader.readMaze(mazeFile); // reading maze file and storing in 2d array
             Maze maze = new Maze(grid); // create an object in Maze
-            Movement user = new Movement(maze.getStartRow(), maze.getStartColumn()); // create an object in User
+            Movement user = new Movement(maze.getStartRow(), maze.getStartColumn()); // create an object in Movement
 
-            if (cmd2.hasOption("p")) { // Check for p flag
-                String givenPath = cmd2.getOptionValue("p"); // Storing given path
+            if (cmd.hasOption("p")) { // Check for p flag
+                String givenPath = cmd.getOptionValue("p"); // Storing given path
                 logger.info("**** Verifying path");
 
-                PathChecker checkPath = new PathChecker(maze, user);
-                checkPath.verifyPath(givenPath);
+                PathChecker checkPath = new PathChecker(maze, user); // Creates obect in PathChecker
+                checkPath.verifyPath(givenPath); // Verify given path
 
             } else {
                 logger.info("**** Computing path");
 
-                maze.playMaze(user); // Method to calculate and display canonical path of given maze
+                maze.playMaze(user); // Method to calculate and display factorized path of given maze
             }
 
         } catch (Exception e) {

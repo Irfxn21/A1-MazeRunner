@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MazeReader {
+public class MazeReader { // Class to read maze file
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -35,9 +35,9 @@ public class MazeReader {
             }
             reader.close();
 
-            return mazeRows.toArray(new char[0][]);
+            return mazeRows.toArray(new char[0][]); // Storing file in 2d array
         } catch (Exception e) {
-            logger.error("Error has occured");
+            logger.error("/!\\\\ An error has occurred /!\\\\"); // error message if issues with maze file
         }
         return new char[0][0];
     }

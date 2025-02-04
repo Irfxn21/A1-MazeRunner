@@ -1,23 +1,23 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class PathChecker {
+public class PathChecker { // Class to verify given path
 
     private Maze maze;
-    private Movement user;
+    private Movement user; // Attributes
 
     public PathChecker(Maze maze, Movement user) {
         this.maze = maze;
-        this.user = user;
+        this.user = user; // Constructors
     }
 
-    public boolean verifyPath(String path) {
-        String canonicalPath = expandPath(path);
-        for (char i : canonicalPath.toCharArray()) {
+    public boolean verifyPath(String path) { // Method to verify path
+        String canonicalPath = expandPath(path); // Converts given path into canonical form
+        for (char i : canonicalPath.toCharArray()) { // iterates through each move
             if (i == 'F') {
                 int nextRow = user.getNextRow();
                 int nextColumn = user.getNextColumn();
 
-                if (maze.wallCheck(nextRow, nextColumn)) {
+                if (maze.wallCheck(nextRow, nextColumn)) { // Checks if move leads to a wall
                     System.out.println("Incorrect Path");
                     return false;
                 }
@@ -34,7 +34,7 @@ public class PathChecker {
             }
         }
 
-        if (user.getColumn() == maze.sizeColumn() - 1) {
+        if (user.getColumn() == maze.sizeColumn() - 1) { // Checks if user is at the end of the maze
             System.out.println("Correct Path");
             return true;
         } else {
@@ -43,15 +43,15 @@ public class PathChecker {
         }
     }
 
-    private String expandPath(String path) {
+    private String expandPath(String path) { // Method to convert factorized path into canonical
 
         String expanded = "";
         String number = "";
 
-        for (char i : path.toCharArray()) {
-            if (Character.isDigit(i)) {
+        for (char i : path.toCharArray()) { // Stores given path in array of characters
+            if (Character.isDigit(i)) { // Checks if character is a digit
                 number = number + i;
-            } else if (i == 'F' || i == 'L' || i == 'R') {
+            } else if (i == 'F' || i == 'L' || i == 'R') { // Checks if move is a valid move
                 int multi;
                 if (number.equals("")) {
                     multi = 1;
@@ -59,12 +59,12 @@ public class PathChecker {
                     multi = Integer.parseInt(number);
                 }
 
-                for (int j = 0; j < multi; j++) {
+                for (int j = 0; j < multi; j++) { // Repeats move by specified number, e.g 4F, adds F 4 times
                     expanded = expanded + i;
                 }
                 number = "";
             }
         }
-        return expanded;
+        return expanded; // Return canonical path
     }
 }

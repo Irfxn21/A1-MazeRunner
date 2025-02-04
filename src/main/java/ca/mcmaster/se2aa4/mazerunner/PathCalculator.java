@@ -2,9 +2,9 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.List;
 
-public class PathCalculator {
+public class PathCalculator { // Class to calculate path for maze
 
-    private List<Character> path;
+    private List<Character> path; // List to store moves
 
     public PathCalculator(List<Character> path) {
         this.path = path;
@@ -18,28 +18,27 @@ public class PathCalculator {
         System.out.println();
     }
 
-    public void factorizedPath() {
-        char temp = path.get(0);
+    public void factorizedPath() { // Method to calculate factorized path
+        char temp = path.get(0); // Get first move from list of moves stored
         int count = 1;
-        for (int i = 1; i < path.size(); i++) {
-            if (path.get(i) == temp) {
+        for (int i = 1; i < path.size(); i++) { // Iterate through list of moves
+            if (path.get(i) == temp) { // Checks if move matches previously stored move
                 count += 1;
             } else {
                 if (count > 1) {
                     System.out.print(count + "" + temp + " ");
                 } else {
-                    System.out.print(temp + " ");
+                    System.out.print(temp + " "); // Prints out factorized path
                 }
                 count = 1;
-                temp = path.get(i);
+                temp = path.get(i); // Resets variables
             }
         }
-        if (count > 1) {
+        if (count > 1) { // Prints out the last move
             System.out.print(count + "" + temp);
         } else {
             System.out.print(temp);
         }
         System.out.println();
     }
-
 }

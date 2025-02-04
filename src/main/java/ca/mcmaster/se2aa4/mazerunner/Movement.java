@@ -2,17 +2,17 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class Movement extends User implements Move {
+public class Movement extends User implements Move { // Class to determine movement
 
     private ArrayList<Character> path = new ArrayList<Character>(); // Array list to store moves in path
     private PathCalculator pathCalculator;
 
     public Movement(int row, int column) {
         super(row, column);
-        this.pathCalculator = new PathCalculator(path);
+        this.pathCalculator = new PathCalculator(path); // Create new pbject in PathCalculator
     }
 
-    public void turnRight() {
+    public void turnRight() { // Method to turn right
         if (direction == 'N') {
             direction = 'E';
         } else if (direction == 'S') {
@@ -25,7 +25,7 @@ public class Movement extends User implements Move {
         path.add('R');
     }
 
-    public void turnLeft() {
+    public void turnLeft() { // Method to turn left
         if (direction == 'N') {
             direction = 'W';
         } else if (direction == 'S') {
@@ -38,7 +38,7 @@ public class Movement extends User implements Move {
         path.add('L');
     }
 
-    public void moveForward() { // Method to move forward in the maze
+    public void moveForward() { // Method to move forward
         if (direction == 'N') {
             row = row - 1;
             path.add('F');
@@ -54,7 +54,7 @@ public class Movement extends User implements Move {
         }
     }
 
-    public void displayPath() {
+    public void displayPath() { // Method to display path
         pathCalculator.factorizedPath();
     }
 

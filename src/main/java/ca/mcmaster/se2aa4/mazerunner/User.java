@@ -1,19 +1,15 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public abstract class User {
+public abstract class User { // Abstract class
 
     // Attributes
     protected int row;
     protected int column;
-    protected char direction = 'E'; // Initial direction set East for now
+    protected char direction = 'E'; // Initial direction set East
 
     public User(int row, int column) {
         this.row = row;
         this.column = column; // Constructors
-    }
-
-    public char getDirection() {
-        return direction;
     }
 
     public int getRow() {
@@ -24,7 +20,7 @@ public abstract class User {
         return column; // Get column of current postion
     }
 
-    public int getNextRow() {
+    public int getNextRow() { // Get row value of next tile
         if (direction == 'N') {
             return row - 1;
         }
@@ -34,7 +30,7 @@ public abstract class User {
         return row;
     }
 
-    public int getNextColumn() {
+    public int getNextColumn() { // Get column value of next tile
         if (direction == 'E') {
             return column + 1;
         }
@@ -44,7 +40,7 @@ public abstract class User {
         return column;
     }
 
-    public int getRightRow() {
+    public int getRightRow() { // Get row value of right tile
         if (direction == 'N' || direction == 'S') {
             return row;
         }
@@ -54,7 +50,7 @@ public abstract class User {
         return row - 1;
     }
 
-    public int getRightColumn() {
+    public int getRightColumn() { // Get column value of right column
         if (direction == 'E' || direction == 'W') {
             return column;
         }
@@ -70,5 +66,5 @@ public abstract class User {
 
     public abstract void turnLeft();
 
-    public abstract void displayPath();
+    public abstract void displayPath(); // Abstract methods
 }
