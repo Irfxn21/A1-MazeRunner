@@ -1,12 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -31,29 +27,7 @@ public class Main {
 
             String mazeFile = cmd1.getOptionValue("i"); // storing name of file
 
-            logger.info("**** Reading the maze from file " + mazeFile);
-            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
-
-            List<char[]> mazeRows = new ArrayList<>(); // list to store rows of maze file
-
-            String line;
-
-            while ((line = reader.readLine()) != null) { // reading maze from file
-                char[] row = line.toCharArray();
-                mazeRows.add(row); // adding row to list
-
-                for (int idx = 0; idx < line.length(); idx++) { // iterating through each character in line
-                    if (line.charAt(idx) == '#') {
-                        logger.debug("WALL "); // check and log for wall
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.debug("PASS "); // check and log for empty space
-                    }
-                }
-                logger.debug(System.lineSeparator());
-            }
-            reader.close();
-
-            char[][] grid = mazeRows.toArray(new char[0][]); // convert to 2d array
+            char[][] grid = MazeReader.readMaze(mazeFile);
             Maze maze = new Maze(grid); // create an object in Maze
             Movement user = new Movement(maze.getStartRow(), maze.getStartColumn()); // create an object in User
 
